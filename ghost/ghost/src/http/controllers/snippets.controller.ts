@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, UseFilters, UseInterceptors} from '@nestjs/common';
+import {Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, UseFilters, UseGuards, UseInterceptors} from '@nestjs/common';
 import {SnippetsService} from '../../core/snippets/snippets.service';
 import {SnippetDTO} from './snippet.dto';
 import {Pagination} from '../../common/types/pagination.type';
