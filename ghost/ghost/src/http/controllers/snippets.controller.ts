@@ -7,8 +7,11 @@ import {now} from '../../common/helpers/date.helper';
 import {LocationHeaderInterceptor} from '../interceptors/location-header.interceptor';
 import {GlobalExceptionFilter} from '../filters/global-exception.filter';
 import {NotFoundError} from '@tryghost/errors';
+import {Roles} from '../../common/decorators/permissions.decorator';
+import {PermissionsGuard} from '../../common/guards/permissions.guard';
 
 @Controller('snippets')
+@UseGuards(PermissionsGuard)
 @UseInterceptors(LocationHeaderInterceptor)
 @UseFilters(GlobalExceptionFilter)
 export class SnippetsController {
@@ -50,6 +53,14 @@ export class SnippetsController {
         return data;
     }
 
+    @Roles([
+        'Admin',
+        'Author',
+        'Contributor',
+        'Editor',
+        'Owner',
+        'Admin Integration'
+    ])
     @Get(':id')
     async read(
         @Param('id') id: 'string',
@@ -117,6 +128,14 @@ export class SnippetsController {
         };
     }
 
+    @Roles([
+        'Admin',
+        'Author',
+        'Contributor',
+        'Editor',
+        'Owner',
+        'Admin Integration'
+    ])
     @Get('')
     async browse(
         @Query('formats') formats?: 'mobiledoc' | 'lexical',
